@@ -8,7 +8,7 @@
 // Correo: alu0101734682@ull.edu.es
 // Fecha: 20/09/2025
 // Archivo: cadena.cc
-// Contiene la clase Cadena
+// Contiene la implementación de la clase Cadena
 
 #include "cadena.h"
 #include <algorithm>

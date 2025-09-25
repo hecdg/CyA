@@ -20,7 +20,7 @@
 class Lenguaje {
  public:
   Lenguaje() = default;
-  explicit Lenguaje(const std::set<std::string>& cadenas);
+  Lenguaje(const std::set<std::string>& cadenas);
 
   friend std::ostream& operator<<(std::ostream& os, const Lenguaje& lenguaje);
 

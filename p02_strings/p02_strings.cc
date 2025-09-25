@@ -43,32 +43,30 @@ int main(int argc, char* argv[]) {
   std::ofstream fout(output_file);
 
   std::string valor, simbolos;
-  int line_number = 1;
   while (fin >> valor >> simbolos) {
     Alfabeto alfabeto(simbolos);
     Cadena cadena(valor, alfabeto);
 
     switch (opcode) {
       case 1:
-        fout << line_number << " " << alfabeto << "\n";
+        fout << alfabeto << "\n";
         break;
       case 2:
-        fout << line_number << " " << cadena.Longitud() << "\n";
+        fout << cadena.Longitud() << "\n";
         break;
       case 3:
-        fout << line_number << " " << cadena.Inversa() << "\n";
+        fout << cadena.Inversa() << "\n";
         break;
       case 4:
-        fout << line_number << " " << Lenguaje(cadena.Prefijos()) << "\n";
+        fout << Lenguaje(cadena.Prefijos()) << "\n";
         break;
       case 5:
-        fout << line_number << " " << Lenguaje(cadena.Sufijos()) << "\n";
+        fout << Lenguaje(cadena.Sufijos()) << "\n";
         break;
       default:
         std::cerr << "Opcode no válido\n";
         return 1;
     }
-    ++line_number;
   }
 
   return 0;

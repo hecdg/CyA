@@ -8,7 +8,7 @@
 // Correo: alu0101734682@ull.edu.es
 // Fecha: 20/09/2025
 // Archivo: lenguaje.cc
-// Contiene la clase Lenguaje
+// Contiene la implementación de la clase Lenguaje
 
 #include "lenguaje.h"
 

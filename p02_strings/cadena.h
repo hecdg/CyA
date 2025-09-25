@@ -27,9 +27,6 @@ class Cadena {
   std::set<std::string> Prefijos() const;
   std::set<std::string> Sufijos() const;
 
-  const std::string& Valor() const { return valor_; }
-  const Alfabeto& GetAlfabeto() const { return alfabeto_; }
-
   friend std::ostream& operator<<(std::ostream& os, const Cadena& cadena);
 
  private:

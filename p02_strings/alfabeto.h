@@ -20,10 +20,7 @@
 class Alfabeto {
  public:
   Alfabeto() = default;
-  explicit Alfabeto(const std::string& simbolos);
-
-  bool Pertenece(char simbolo) const;
-  const std::set<char>& Simbolos() const;
+  Alfabeto(const std::string& simbolos);
 
   friend std::ostream& operator<<(std::ostream& os, const Alfabeto& alfabeto);
 
