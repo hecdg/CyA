@@ -5,7 +5,6 @@
 #include <regex>
 #include <string>
 
-// Analiza un archivo fuente y detecta variables, bucles, comentarios y main
 bool CodeAnalyzer::AnalyzeFile(const std::string& input_file) {
     std::ifstream file(input_file);
     if (!file.is_open()) {
@@ -33,7 +32,7 @@ bool CodeAnalyzer::AnalyzeFile(const std::string& input_file) {
     while (std::getline(file, line)) {
         ++line_number;
 
-    // --- Si estamos dentro de un comentario multilínea ---
+    //Comentario multilínea
     if (in_multiline_comment) {
         multiline_content += "\n" + line;
     if (std::regex_search(line, regex_comment_end)) {
@@ -45,7 +44,7 @@ bool CodeAnalyzer::AnalyzeFile(const std::string& input_file) {
         continue;
     }
 
-    // --- Detección de inicio de comentario multilínea ---
+    //Detección de inicio de comentario multilínea
     if (std::regex_search(line, regex_comment_start)) {
         if (std::regex_search(line, regex_comment_end)) {
             estructura_.AddComment(Comment("multi", line_number, line_number, line));
@@ -57,7 +56,7 @@ bool CodeAnalyzer::AnalyzeFile(const std::string& input_file) {
         continue;
     }
 
-    // --- Comentario de una línea ---
+    //Comentario de una línea
     std::smatch match;
     if (std::regex_search(line, match, regex_comment_single)) {
         estructura_.AddComment(Comment("single", line_number, line_number, match[1]));
@@ -65,19 +64,19 @@ bool CodeAnalyzer::AnalyzeFile(const std::string& input_file) {
         line = line.substr(0, match.position());
     }
 
-    // --- Función main ---
+    //Función main
     if (std::regex_search(line, regex_main)) {
         estructura_.SetHasMain(true);
     }
 
-    // --- Bucles ---
+    //Bucles
     if (std::regex_search(line, regex_for)) {
         estructura_.AddLoop(Loop("for", line_number));
     } else if (std::regex_search(line, regex_while)) {
         estructura_.AddLoop(Loop("while", line_number));
     }
 
-    // --- Variables ---
+    //Variables
     if (std::regex_search(line, match, regex_var)) {
         std::string tipo = match[1];
         std::string nombre = match[2];
@@ -90,7 +89,7 @@ bool CodeAnalyzer::AnalyzeFile(const std::string& input_file) {
     }
   }
 
-  // --- Si el archivo termina dentro de un comentario multilínea ---
+  //Si el archivo termina dentro de un comentario multilínea
     if (in_multiline_comment) {
         estructura_.AddComment(Comment("multi", multiline_start, line_number, multiline_content + "\n(unterminated)"));
     }

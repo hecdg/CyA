@@ -10,7 +10,7 @@ class Loop {
     const std::string& tipo() const;
     int linea() const;
 
-    std::string ToString() const;  // Ejemplo: [Line 23] LOOP: for
+    std::string ToString() const; 
 
   private:
     std::string tipo_;

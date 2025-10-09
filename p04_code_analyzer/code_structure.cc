@@ -4,7 +4,6 @@
 #include <iostream>
 #include <sstream>
 
-// Constructor
 CodeStructure::CodeStructure(std::string filename)
     : filename_(std::move(filename)) {}
 
@@ -28,7 +27,7 @@ bool CodeStructure::GenerateReport(const std::string& output_file) const {
 
     ofs << "PROGRAM: " << filename_ << "\n";
 
-  // ===== DESCRIPTION =====
+  //DESCRIPTION
     ofs << "DESCRIPTION:\n";
     bool found_description = false;
     for (const auto& c : comments_) {
@@ -43,7 +42,7 @@ bool CodeStructure::GenerateReport(const std::string& output_file) const {
     }
     ofs << "\n";
 
-  // ===== VARIABLES =====
+  //VARIABLES
     ofs << "VARIABLES:\n";
     if (variables_.empty()) {
         ofs << "(none)\n";
@@ -54,7 +53,7 @@ bool CodeStructure::GenerateReport(const std::string& output_file) const {
     }
     ofs << "\n";
 
-  // ===== STATEMENTS (loops) =====
+  //STATEMENTS (loops)
     ofs << "STATEMENTS:\n";
     if (loops_.empty()) {
         ofs << "(none)\n";
@@ -65,17 +64,16 @@ bool CodeStructure::GenerateReport(const std::string& output_file) const {
     }
     ofs << "\n";
 
-  // ===== MAIN =====
+  //MAIN 
     ofs << "MAIN:\n";
     ofs << (has_main_ ? "True" : "False") << "\n\n";
 
-  // ===== COMMENTS =====
+  //COMMENTS
     ofs << "COMMENTS:\n";
     if (comments_.empty()) {
         ofs << "(none)\n";
     } else {
         for (const auto& c : comments_) {
-      // Mostrar formato similar al PDF
         if (c.linea_inicio() == c.linea_fin()) {
             ofs << "[Line " << c.linea_inicio() << "] ";
         } else {

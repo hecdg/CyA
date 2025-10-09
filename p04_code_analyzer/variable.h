@@ -12,8 +12,7 @@ class Variable {
         int linea() const;
         bool inicializada() const;
 
-        std::string ToString() const;  // Ej: [Line 22] INT: factorial = 1
-
+        std::string ToString() const; 
     private:
         std::string tipo_;
         std::string nombre_;

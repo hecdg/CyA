@@ -5,17 +5,15 @@
 #include "code_structure.h"
 
 class CodeAnalyzer {
-  public:
-    explicit CodeAnalyzer() = default;
+    public:
+      explicit CodeAnalyzer() = default;
 
-  // Analiza el archivo de entrada (línea a línea) y llena la estructura.
-    bool AnalyzeFile(const std::string& input_file);
+      bool AnalyzeFile(const std::string& input_file);
 
-  // Devuelve la estructura analizada.
-    const CodeStructure& estructura() const { return estructura_; }
+      const CodeStructure& estructura() const { return estructura_; }
 
-  private:
-    CodeStructure estructura_ = CodeStructure("");
+    private:
+      CodeStructure estructura_ = CodeStructure("");
 };
 
 #endif  // CODE_ANALYZER_H_
