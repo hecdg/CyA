@@ -22,7 +22,7 @@ bool CodeAnalyzer::AnalyzeFile(const std::string& input_file) {
     int multiline_start = 0;
     std::string multiline_content;
 
-    std::regex regex_var(R"(^\s*(int|double)\s+([a-zA-Z_]\w*)(\s*=\s*[^;]+)?;)");
+    std::regex regex_var(R"(^\s*(int|double)\s+([a-zA-Z_]\w*)(\s*(=\s*[^;]+|\{\s*[^;]*\s*\}))?\s*;)");
     std::regex regex_for(R"(^\s*for\s*\()");
     std::regex regex_while(R"(^\s*while\s*\()");
     std::regex regex_main(R"(\bint\s+main\s*\()");
@@ -62,7 +62,7 @@ bool CodeAnalyzer::AnalyzeFile(const std::string& input_file) {
     if (std::regex_search(line, match, regex_comment_single)) {
         estructura_.AddComment(Comment("single", line_number, line_number, match[1]));
       // seguimos al siguiente para evitar falsos positivos en código comentado
-        continue;
+        line = line.substr(0, match.position());
     }
 
     // --- Función main ---
@@ -82,7 +82,11 @@ bool CodeAnalyzer::AnalyzeFile(const std::string& input_file) {
         std::string tipo = match[1];
         std::string nombre = match[2];
         bool inicializada = match[3].matched;
-        estructura_.AddVariable(Variable(tipo, nombre, line_number, inicializada));
+        std::string valor = "";
+        if (inicializada) {
+            valor = match[3].str(); 
+        }
+        estructura_.AddVariable(Variable(tipo, nombre, line_number, inicializada, valor));
     }
   }
 
